@@ -1,6 +1,6 @@
 # Scalable-Github-Scraping-Service
 
-###### FASTapi, Pydantic, Unit Test (Tesing), Documentation, Asynchrounous Design, Caching, auto-scaling if possible,
+###### FASTapi, Pydantic, Error handiling!, Unit Test (Tesing), Documentation, Asynchrounous Design, Caching, auto-scaling if possible,
 
 ### Architecture
 
@@ -31,6 +31,12 @@ I delegate the core business logic to the service layer without embedding it in 
 ##### External Service Layer
 
 - Encapsulates all interactions with external APIs.
+
+### Refenrece Links
+
+Poetry Documentation - https://python-poetry.org/docs/
+Typer Documentation - https://typer.tiangolo.com/
+FastAPI Documentation - https://fastapi.tiangolo.com/
 
 ### Q & A
 
