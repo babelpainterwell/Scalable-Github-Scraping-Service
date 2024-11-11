@@ -18,6 +18,11 @@
 
 I delegate the core business logic to the service layer without embedding it in the api layer considering the needs for better scalability, seperation of concerns and testability.
 
+- Endpoints
+  - `GET /users/{username}/projects` - retrieves projects for a given GitHub username.
+  - `GET /users/recent/{n}` - retrieves the N most recent users saved in the database.
+  - `GET /projects/most-starred/{n}` - retrieves the N most starred projects saved in the database.
+
 ##### Service Layer
 
 - Implements the main functionalities, such as retrieving user projects, getting recent users and fetching most starred prohecrs.
