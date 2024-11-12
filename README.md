@@ -1,6 +1,6 @@
 # Scalable-Github-Scraping-Service
 
-###### FASTapi, Pydantic, Error handiling!, Unit Test (Tesing), Documentation, Asynchrounous Design, Caching, auto-scaling if possible,
+###### FASTapi, Pydantic, Error handiling!, Unit Test (Tesing), Documentation, Asynchrounous Design, Caching, logging, auto-scaling if possible,
 
 ### Architecture
 
@@ -33,9 +33,25 @@ I delegate the core business logic to the service layer without embedding it in 
 
 - Focuses solely on interacting with the database so that we make future changes in the database schema only affect this layer.
 
+When using SQLALchemy, I implemented a repository pattern to abstract the database operations from the service layer, which is, similarly as we did with the external service layer, to make the code more testable and maintainable.
+
 ##### External Service Layer
 
 - Encapsulates all interactions with external APIs.
+
+### Trade-offs and Design Decisions
+
+##### 1. Asynchronous Code
+
+- Chose to use asynchronous code throughout to better align with FASTapi's async capabilities and improve performance for I/O bound operations such as database queries and HTTP requests.
+
+##### 2. Repository Pattern
+
+- Implemented repositories for data access to abstract the database operations from the service layer, which makes the code more testable and maintainable. The trade-off is that it adds an extra layer of complexity.
+
+##### 3. Error Handling and Data Validation
+
+- Used Pydantic models for data validation
 
 ### Refenrece Links
 
