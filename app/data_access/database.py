@@ -18,7 +18,3 @@ async_session = sessionmaker(
     bind=engine, class_=AsyncSession, expire_on_commit=False 
 ) 
 
-# Depends(get_db) allows FASTAPI to create a new session for each request
-# async def get_db():
-#     async with async_session() as session:
-#         yield session
