@@ -33,7 +33,7 @@ I delegate the core business logic to the service layer without embedding it in 
 
 - Focuses solely on interacting with the database so that we make future changes in the database schema only affect this layer.
 
-When using SQLALchemy, I implemented a repository pattern to abstract the database operations from the service layer, which is, similarly as we did with the external service layer, to make the code more testable and maintainable.
+~~When using SQLALchemy~~ Now using SQLModel for similicity and avoiding potential validation error, I implemented a repository pattern to abstract the database operations from the service layer, which is, similarly as we did with the external service layer, to make the code more testable and maintainable.
 
 ##### External Service Layer
 
@@ -51,7 +51,7 @@ When using SQLALchemy, I implemented a repository pattern to abstract the databa
 
 ##### 3. Error Handling and Data Validation
 
-- Used Pydantic models for data validation
+- Used Pydantic models for data validation. SQLModel is chosen for the ORM models to work with Pydantic models.
 
 ### Refenrece Links
 
