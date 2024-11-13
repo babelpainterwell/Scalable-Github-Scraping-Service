@@ -56,7 +56,7 @@ class UserRepository:
         try:
             async with async_session() as session:
                 statement = select(User).order_by(User.created_at.desc()).limit(n)
-                result = await session.exec(statement)
+                result = await session.execute(statement)
                 return result.scalars().all()
         except SQLAlchemyError as e:
             # Log the exception here
