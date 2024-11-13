@@ -19,3 +19,10 @@ class ProjectRepository:
         get all projects by user id
         """
         pass
+
+    @staticmethod
+    async def create_projects(user_id: int, projects_data: dict):
+        """
+        create projects for a user
+        """
+        pass
