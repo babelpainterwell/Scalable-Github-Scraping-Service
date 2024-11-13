@@ -1,0 +1,30 @@
+Step-by-Step Data Flow
+
+
+Client Request:
+A client (CLI tool) sends an HTTP request to the API endpoint.
+
+API Layer (app/api/routes.py):
+Receives the HTTP request.
+Validates input parameters.
+Calls the service layer function to handle the request.
+
+Service Layer (app/services/):
+Interacts with the Data Access Layer via repositories to perform database operations.
+May interact with External Services through the external services layer.
+Processes data and applies business rules.
+Converts data into Pydantic models to return to the API layer.
+
+Data Access Layer (repositories, app/data_access/):
+Repositories interact with the database using SQLAlchemy ORM models.
+Perform CRUD operations as requested by the service layer.
+Return ORM model instances to the service layer.
+
+External Services Layer (app/external_services/):
+Handles communication with external APIs (e.g., GitHub API).
+Processes external data and passes it to the service layer.
+
+Back to API Layer:
+Receives data (Pydantic models) from the service layer.
+Uses Pydantic models to serialize data into JSON.
+Sends the HTTP response back to the client.

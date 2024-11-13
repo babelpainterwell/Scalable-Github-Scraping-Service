@@ -6,6 +6,8 @@ from typing import List, Optional
 from app.models.schemas.project import ProjectResponse, UserResponse
 from app.data_access.repositories.project_repository import ProjectRepository
 from app.data_access.repositories.user_repository import UserRepository
+from app.external_services.github_api import GitHubAPIClient
+
 
 async def get_user_projects(username:str) -> Optional[List[ProjectResponse]]:
     """
@@ -29,7 +31,9 @@ async def get_user_projects(username:str) -> Optional[List[ProjectResponse]]:
             # save the user and their projects
             user = await UserRepository.create(username)
             projects = await ProjectRepository.create_projects(user.id, projects_data)
-        # return projcts START HERE!!!
-    except SQLAlchemyError as e:
+        # return projcts, convert ORM models to Pydantic models
+        return [ProjectResponse.from_orm(project) for project in projects]
+
+    except Exception as e:
         # log the exception 
         return None
