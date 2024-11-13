@@ -5,3 +5,7 @@ class NotFoundError(Exception):
 class DatabaseError(Exception):
     """Raised when there is an issue with the database"""
     pass
+
+class ExternalAPIError(Exception):
+    """Raised when there is an issue with external API"""
+    pass

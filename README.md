@@ -63,7 +63,9 @@ FastAPI Documentation - https://fastapi.tiangolo.com/
 
 1. To let SQLAlchemy ORM models to work with Pydantic models, later realized that FASTapi has built-in SQLModel which is a Pydantic model with SQLAlchemy support.
 
-### Q & A
+### Q & A & Todo
 
 1. who are the real users? hiring manager? the number of potential users that will use this service? (the need for scalability however is required.)
 2. `create_async_engine` from SQLAlchemy works for SQLModel?
+3. To distinguish between a user not found and a user with no public repositories.
+4. To test the github_api module.

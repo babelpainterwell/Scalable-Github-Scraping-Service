@@ -36,7 +36,7 @@ class ProjectRepository:
                 return result.scalars().all()
         except SQLAlchemyError as e:
             return []
-
+    
     @staticmethod
     async def create_projects(user_id: int, projects_data: List[dict]) -> Optional[List[Project]]:
         """
@@ -49,7 +49,7 @@ class ProjectRepository:
                     project = Project(
                         name=data['name'],
                         description=data.get('description'),
-                        stars=data.get('stargazers_count', 0), # check the key name
+                        stars=data.get('stargazers_count', 0),
                         forks=data.get('forks_count', 0),
                         user_id=user_id
                     )
