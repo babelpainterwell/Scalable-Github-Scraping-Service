@@ -7,6 +7,9 @@ from app.models import User
 from sqlalchemy.exc import SQLAlchemyError
 from sqlmodel import select
 from typing import Optional, List
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 class UserRepository:
@@ -31,7 +34,7 @@ class UserRepository:
                     await session.refresh(user, attribute_names=["projects"])
                 return user
         except SQLAlchemyError as e:
-            # Log the exception here
+            logger.error(f"Database error in get_by_username: {e}")
             return None
 
     @staticmethod
@@ -45,7 +48,7 @@ class UserRepository:
                 await session.commit()
                 return user
         except SQLAlchemyError as e:
-            # Log the exception here
+            logger.error(f"Database error in create: {e}")
             return None
 
     @staticmethod
@@ -59,5 +62,5 @@ class UserRepository:
                 result = await session.execute(statement)
                 return result.scalars().all()
         except SQLAlchemyError as e:
-            # Log the exception here
+            logger.error(f"Database error in get_most_recent: {e}")
             return []

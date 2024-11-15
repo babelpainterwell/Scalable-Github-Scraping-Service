@@ -7,7 +7,11 @@ from app.models import Project
 from sqlalchemy.exc import SQLAlchemyError
 from typing import List, Optional
 from sqlmodel import select
+import logging
 
+
+
+logger = logging.getLogger(__name__)
 
 class ProjectRepository:
     @staticmethod
@@ -58,5 +62,5 @@ class ProjectRepository:
                 await session.commit()
                 return projects
         except SQLAlchemyError as e:
-            # Log the exception here
+            logger.error(f"Database error in create_projects: {e}")
             return []

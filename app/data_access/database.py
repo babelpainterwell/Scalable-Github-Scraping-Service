@@ -13,7 +13,7 @@ engine = create_async_engine(DATABASE_URL, echo=True) # for debugging
 
 
 # session make factory 
-# prevent the session from being closed after a commit for data reuse
+# prevent ORM objects from being expired after commit
 async_session = sessionmaker(
     bind=engine, class_=AsyncSession, expire_on_commit=False 
 ) 
