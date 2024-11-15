@@ -34,3 +34,285 @@ CREATE TABLE project (
 
 2024-11-15 00:11:17,759 [INFO] sqlalchemy.engine.Engine: [no key 0.00012s] ()
 2024-11-15 00:11:17,759 [INFO] sqlalchemy.engine.Engine: COMMIT
+2024-11-15 00:22:14,109 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2024-11-15 00:22:14,109 [INFO] sqlalchemy.engine.Engine: PRAGMA main.table_info("project")
+2024-11-15 00:22:14,110 [INFO] sqlalchemy.engine.Engine: [raw sql] ()
+2024-11-15 00:22:14,110 [INFO] sqlalchemy.engine.Engine: PRAGMA main.table_info("user")
+2024-11-15 00:22:14,110 [INFO] sqlalchemy.engine.Engine: [raw sql] ()
+2024-11-15 00:22:14,110 [INFO] sqlalchemy.engine.Engine: COMMIT
+2024-11-15 00:22:28,036 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2024-11-15 00:22:28,040 [INFO] sqlalchemy.engine.Engine: SELECT user.id, user.username, user.created_at 
+FROM user 
+WHERE user.username = ?
+2024-11-15 00:22:28,040 [INFO] sqlalchemy.engine.Engine: [generated in 0.00011s] ('username',)
+2024-11-15 00:22:28,040 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2024-11-15 00:22:28,041 [ERROR] app.services.user_service: An unexpected error occurred: 'Settings' object has no attribute 'GITHUB_API_TOKEN'
+2024-11-15 00:22:53,624 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2024-11-15 00:22:53,626 [INFO] sqlalchemy.engine.Engine: SELECT user.id, user.username, user.created_at 
+FROM user 
+WHERE user.username = ?
+2024-11-15 00:22:53,626 [INFO] sqlalchemy.engine.Engine: [cached since 25.59s ago] ('babelpainterwell',)
+2024-11-15 00:22:53,627 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2024-11-15 00:22:53,627 [ERROR] app.services.user_service: An unexpected error occurred: 'Settings' object has no attribute 'GITHUB_API_TOKEN'
+2024-11-15 00:24:12,524 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2024-11-15 00:24:12,524 [INFO] sqlalchemy.engine.Engine: PRAGMA main.table_info("project")
+2024-11-15 00:24:12,524 [INFO] sqlalchemy.engine.Engine: [raw sql] ()
+2024-11-15 00:24:12,525 [INFO] sqlalchemy.engine.Engine: PRAGMA main.table_info("user")
+2024-11-15 00:24:12,525 [INFO] sqlalchemy.engine.Engine: [raw sql] ()
+2024-11-15 00:24:12,525 [INFO] sqlalchemy.engine.Engine: COMMIT
+2024-11-15 00:24:25,194 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2024-11-15 00:24:25,199 [INFO] sqlalchemy.engine.Engine: SELECT user.id, user.username, user.created_at 
+FROM user 
+WHERE user.username = ?
+2024-11-15 00:24:25,199 [INFO] sqlalchemy.engine.Engine: [generated in 0.00033s] ('babelpainterwell',)
+2024-11-15 00:24:25,200 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2024-11-15 00:24:25,221 [INFO] app.external_services.github_api: Fetching projects for user 'babelpainterwell' from GitHub API.
+2024-11-15 00:24:25,762 [INFO] httpx: HTTP Request: GET https://api.github.com/users/babelpainterwell/repos "HTTP/1.1 200 OK"
+2024-11-15 00:24:25,770 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2024-11-15 00:24:25,772 [INFO] sqlalchemy.engine.Engine: INSERT INTO user (username, created_at) VALUES (?, ?)
+2024-11-15 00:24:25,772 [INFO] sqlalchemy.engine.Engine: [generated in 0.00026s] ('babelpainterwell', '2024-11-15 05:24:25.768290')
+2024-11-15 00:24:25,775 [INFO] sqlalchemy.engine.Engine: COMMIT
+2024-11-15 00:24:25,778 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2024-11-15 00:24:25,780 [INFO] sqlalchemy.engine.Engine: INSERT INTO project (name, description, stars, forks, user_id) VALUES (?, ?, ?, ?, ?) RETURNING id
+2024-11-15 00:24:25,780 [INFO] sqlalchemy.engine.Engine: [generated in 0.00018s (insertmanyvalues) 1/25 (ordered; batch not supported)] ('Adam-Optimizer-Implementation', None, 0, 0, 1)
+2024-11-15 00:24:25,781 [INFO] sqlalchemy.engine.Engine: INSERT INTO project (name, description, stars, forks, user_id) VALUES (?, ?, ?, ?, ?) RETURNING id
+2024-11-15 00:24:25,781 [INFO] sqlalchemy.engine.Engine: [insertmanyvalues 2/25 (ordered; batch not supported)] ('Attention_Detector', None, 0, 0, 1)
+2024-11-15 00:24:25,781 [INFO] sqlalchemy.engine.Engine: INSERT INTO project (name, description, stars, forks, user_id) VALUES (?, ?, ?, ?, ?) RETURNING id
+2024-11-15 00:24:25,781 [INFO] sqlalchemy.engine.Engine: [insertmanyvalues 3/25 (ordered; batch not supported)] ('Backprop-Implementation', None, 0, 0, 1)
+2024-11-15 00:24:25,781 [INFO] sqlalchemy.engine.Engine: INSERT INTO project (name, description, stars, forks, user_id) VALUES (?, ?, ?, ?, ?) RETURNING id
+2024-11-15 00:24:25,781 [INFO] sqlalchemy.engine.Engine: [insertmanyvalues 4/25 (ordered; batch not supported)] ('Custom-Content-Delivery-Network', None, 0, 0, 1)
+2024-11-15 00:24:25,782 [INFO] sqlalchemy.engine.Engine: INSERT INTO project (name, description, stars, forks, user_id) VALUES (?, ?, ?, ?, ?) RETURNING id
+2024-11-15 00:24:25,782 [INFO] sqlalchemy.engine.Engine: [insertmanyvalues 5/25 (ordered; batch not supported)] ('Database-Mining---XML', None, 0, 0, 1)
+2024-11-15 00:24:25,782 [INFO] sqlalchemy.engine.Engine: INSERT INTO project (name, description, stars, forks, user_id) VALUES (?, ?, ?, ?, ?) RETURNING id
+2024-11-15 00:24:25,782 [INFO] sqlalchemy.engine.Engine: [insertmanyvalues 6/25 (ordered; batch not supported)] ('Decentralized-Marketplace-Amazon-Clone', None, 0, 0, 1)
+2024-11-15 00:24:25,782 [INFO] sqlalchemy.engine.Engine: INSERT INTO project (name, description, stars, forks, user_id) VALUES (?, ?, ?, ?, ?) RETURNING id
+2024-11-15 00:24:25,782 [INFO] sqlalchemy.engine.Engine: [insertmanyvalues 7/25 (ordered; batch not supported)] ('Diffusion-Model-Implementation', None, 0, 0, 1)
+2024-11-15 00:24:25,783 [INFO] sqlalchemy.engine.Engine: INSERT INTO project (name, description, stars, forks, user_id) VALUES (?, ?, ?, ?, ?) RETURNING id
+2024-11-15 00:24:25,783 [INFO] sqlalchemy.engine.Engine: [insertmanyvalues 8/25 (ordered; batch not supported)] ('distributed-key-value', None, 0, 0, 1)
+2024-11-15 00:24:25,783 [INFO] sqlalchemy.engine.Engine: INSERT INTO project (name, description, stars, forks, user_id) VALUES (?, ?, ?, ?, ?) RETURNING id
+2024-11-15 00:24:25,783 [INFO] sqlalchemy.engine.Engine: [insertmanyvalues 9/25 (ordered; batch not supported)] ('Federated-Averaging', None, 0, 1, 1)
+2024-11-15 00:24:25,783 [INFO] sqlalchemy.engine.Engine: INSERT INTO project (name, description, stars, forks, user_id) VALUES (?, ?, ?, ?, ?) RETURNING id
+2024-11-15 00:24:25,783 [INFO] sqlalchemy.engine.Engine: [insertmanyvalues 10/25 (ordered; batch not supported)] ('kanbas-node-server-app', None, 0, 0, 1)
+2024-11-15 00:24:25,783 [INFO] sqlalchemy.engine.Engine: INSERT INTO project (name, description, stars, forks, user_id) VALUES (?, ?, ?, ?, ?) RETURNING id
+2024-11-15 00:24:25,784 [INFO] sqlalchemy.engine.Engine: [insertmanyvalues 11/25 (ordered; batch not supported)] ('kanbas-react-web-app', None, 0, 0, 1)
+2024-11-15 00:24:25,784 [INFO] sqlalchemy.engine.Engine: INSERT INTO project (name, description, stars, forks, user_id) VALUES (?, ?, ?, ?, ?) RETURNING id
+2024-11-15 00:24:25,784 [INFO] sqlalchemy.engine.Engine: [insertmanyvalues 12/25 (ordered; batch not supported)] ('Liao-Solutions', None, 0, 0, 1)
+2024-11-15 00:24:25,784 [INFO] sqlalchemy.engine.Engine: INSERT INTO project (name, description, stars, forks, user_id) VALUES (?, ?, ?, ?, ?) RETURNING id
+2024-11-15 00:24:25,784 [INFO] sqlalchemy.engine.Engine: [insertmanyvalues 13/25 (ordered; batch not supported)] ('M', 'self-learning AI agent', 0, 0, 1)
+2024-11-15 00:24:25,784 [INFO] sqlalchemy.engine.Engine: INSERT INTO project (name, description, stars, forks, user_id) VALUES (?, ?, ?, ?, ?) RETURNING id
+2024-11-15 00:24:25,785 [INFO] sqlalchemy.engine.Engine: [insertmanyvalues 14/25 (ordered; batch not supported)] ('MapReduceWell', None, 0, 0, 1)
+2024-11-15 00:24:25,785 [INFO] sqlalchemy.engine.Engine: INSERT INTO project (name, description, stars, forks, user_id) VALUES (?, ?, ?, ?, ?) RETURNING id
+2024-11-15 00:24:25,785 [INFO] sqlalchemy.engine.Engine: [insertmanyvalues 15/25 (ordered; batch not supported)] ('node-nice-product', None, 0, 0, 1)
+2024-11-15 00:24:25,785 [INFO] sqlalchemy.engine.Engine: INSERT INTO project (name, description, stars, forks, user_id) VALUES (?, ?, ?, ?, ?) RETURNING id
+2024-11-15 00:24:25,785 [INFO] sqlalchemy.engine.Engine: [insertmanyvalues 16/25 (ordered; batch not supported)] ('PaperGo', None, 0, 0, 1)
+2024-11-15 00:24:25,785 [INFO] sqlalchemy.engine.Engine: INSERT INTO project (name, description, stars, forks, user_id) VALUES (?, ?, ?, ?, ?) RETURNING id
+2024-11-15 00:24:25,785 [INFO] sqlalchemy.engine.Engine: [insertmanyvalues 17/25 (ordered; batch not supported)] ('papertalk-well', None, 0, 0, 1)
+2024-11-15 00:24:25,786 [INFO] sqlalchemy.engine.Engine: INSERT INTO project (name, description, stars, forks, user_id) VALUES (?, ?, ?, ?, ?) RETURNING id
+2024-11-15 00:24:25,786 [INFO] sqlalchemy.engine.Engine: [insertmanyvalues 18/25 (ordered; batch not supported)] ('Raft', None, 0, 0, 1)
+2024-11-15 00:24:25,786 [INFO] sqlalchemy.engine.Engine: INSERT INTO project (name, description, stars, forks, user_id) VALUES (?, ?, ?, ?, ?) RETURNING id
+2024-11-15 00:24:25,786 [INFO] sqlalchemy.engine.Engine: [insertmanyvalues 19/25 (ordered; batch not supported)] ('Raw-Sockets', None, 0, 0, 1)
+2024-11-15 00:24:25,786 [INFO] sqlalchemy.engine.Engine: INSERT INTO project (name, description, stars, forks, user_id) VALUES (?, ?, ?, ?, ?) RETURNING id
+2024-11-15 00:24:25,786 [INFO] sqlalchemy.engine.Engine: [insertmanyvalues 20/25 (ordered; batch not supported)] ('react-nice-product', None, 0, 0, 1)
+2024-11-15 00:24:25,786 [INFO] sqlalchemy.engine.Engine: INSERT INTO project (name, description, stars, forks, user_id) VALUES (?, ?, ?, ?, ?) RETURNING id
+2024-11-15 00:24:25,787 [INFO] sqlalchemy.engine.Engine: [insertmanyvalues 21/25 (ordered; batch not supported)] ('Scalable-Github-Scraping-Service', None, 0, 0, 1)
+2024-11-15 00:24:25,787 [INFO] sqlalchemy.engine.Engine: INSERT INTO project (name, description, stars, forks, user_id) VALUES (?, ?, ?, ?, ?) RETURNING id
+2024-11-15 00:24:25,787 [INFO] sqlalchemy.engine.Engine: [insertmanyvalues 22/25 (ordered; batch not supported)] ('TalkMe', None, 0, 0, 1)
+2024-11-15 00:24:25,787 [INFO] sqlalchemy.engine.Engine: INSERT INTO project (name, description, stars, forks, user_id) VALUES (?, ?, ?, ?, ?) RETURNING id
+2024-11-15 00:24:25,787 [INFO] sqlalchemy.engine.Engine: [insertmanyvalues 23/25 (ordered; batch not supported)] ('Transformer-From-Scratch', None, 0, 0, 1)
+2024-11-15 00:24:25,787 [INFO] sqlalchemy.engine.Engine: INSERT INTO project (name, description, stars, forks, user_id) VALUES (?, ?, ?, ?, ?) RETURNING id
+2024-11-15 00:24:25,787 [INFO] sqlalchemy.engine.Engine: [insertmanyvalues 24/25 (ordered; batch not supported)] ('Transformer-RNN-Implementation', None, 0, 0, 1)
+2024-11-15 00:24:25,788 [INFO] sqlalchemy.engine.Engine: INSERT INTO project (name, description, stars, forks, user_id) VALUES (?, ?, ?, ?, ?) RETURNING id
+2024-11-15 00:24:25,788 [INFO] sqlalchemy.engine.Engine: [insertmanyvalues 25/25 (ordered; batch not supported)] ('TutorSpace', "I'm not one of the authors who built this amazing project from scratch, but I was fully responsible for its product design/management part.", 1, 0, 1)
+2024-11-15 00:24:25,788 [INFO] sqlalchemy.engine.Engine: COMMIT
+2024-11-15 00:25:23,004 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2024-11-15 00:25:23,006 [INFO] sqlalchemy.engine.Engine: SELECT user.id, user.username, user.created_at 
+FROM user ORDER BY user.created_at DESC
+ LIMIT ? OFFSET ?
+2024-11-15 00:25:23,006 [INFO] sqlalchemy.engine.Engine: [generated in 0.00022s] (5, 0)
+2024-11-15 00:25:23,007 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2024-11-15 00:26:43,673 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2024-11-15 00:26:43,674 [INFO] sqlalchemy.engine.Engine: SELECT user.id, user.username, user.created_at 
+FROM user ORDER BY user.created_at DESC
+ LIMIT ? OFFSET ?
+2024-11-15 00:26:43,674 [INFO] sqlalchemy.engine.Engine: [cached since 80.67s ago] (5, 0)
+2024-11-15 00:26:43,675 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2024-11-15 00:28:27,266 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2024-11-15 00:28:27,266 [INFO] sqlalchemy.engine.Engine: SELECT user.id, user.username, user.created_at 
+FROM user 
+WHERE user.username = ?
+2024-11-15 00:28:27,267 [INFO] sqlalchemy.engine.Engine: [cached since 242.1s ago] ('babelpainterwell',)
+2024-11-15 00:28:27,268 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2024-11-15 00:28:27,268 [ERROR] app.data_access.repositories.user_repository: Database error in get_by_username: Class 'sqlalchemy.engine.row.Row' is not mapped
+2024-11-15 00:28:27,280 [INFO] app.external_services.github_api: Fetching projects for user 'babelpainterwell' from GitHub API.
+2024-11-15 00:28:27,695 [INFO] httpx: HTTP Request: GET https://api.github.com/users/babelpainterwell/repos "HTTP/1.1 200 OK"
+2024-11-15 00:28:27,703 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2024-11-15 00:28:27,704 [INFO] sqlalchemy.engine.Engine: INSERT INTO user (username, created_at) VALUES (?, ?)
+2024-11-15 00:28:27,704 [INFO] sqlalchemy.engine.Engine: [cached since 241.9s ago] ('babelpainterwell', '2024-11-15 05:28:27.702116')
+2024-11-15 00:28:27,705 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2024-11-15 00:28:27,706 [ERROR] app.data_access.repositories.user_repository: Database error in create: (sqlite3.IntegrityError) UNIQUE constraint failed: user.username
+[SQL: INSERT INTO user (username, created_at) VALUES (?, ?)]
+[parameters: ('babelpainterwell', '2024-11-15 05:28:27.702116')]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2024-11-15 00:28:27,706 [ERROR] app.services.user_service: Database error: Error creating user.
+2024-11-15 00:37:00,372 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2024-11-15 00:37:00,373 [INFO] sqlalchemy.engine.Engine: SELECT user.id, user.username, user.created_at 
+FROM user ORDER BY user.created_at DESC
+ LIMIT ? OFFSET ?
+2024-11-15 00:37:00,373 [INFO] sqlalchemy.engine.Engine: [cached since 697.4s ago] (5, 0)
+2024-11-15 00:37:00,375 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2024-11-15 00:40:13,129 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2024-11-15 00:40:13,129 [INFO] sqlalchemy.engine.Engine: PRAGMA main.table_info("project")
+2024-11-15 00:40:13,129 [INFO] sqlalchemy.engine.Engine: [raw sql] ()
+2024-11-15 00:40:13,129 [INFO] sqlalchemy.engine.Engine: PRAGMA main.table_info("user")
+2024-11-15 00:40:13,129 [INFO] sqlalchemy.engine.Engine: [raw sql] ()
+2024-11-15 00:40:13,130 [INFO] sqlalchemy.engine.Engine: COMMIT
+2024-11-15 00:40:26,015 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2024-11-15 00:40:26,015 [INFO] sqlalchemy.engine.Engine: PRAGMA main.table_info("project")
+2024-11-15 00:40:26,015 [INFO] sqlalchemy.engine.Engine: [raw sql] ()
+2024-11-15 00:40:26,015 [INFO] sqlalchemy.engine.Engine: PRAGMA main.table_info("user")
+2024-11-15 00:40:26,015 [INFO] sqlalchemy.engine.Engine: [raw sql] ()
+2024-11-15 00:40:26,016 [INFO] sqlalchemy.engine.Engine: COMMIT
+2024-11-15 00:40:51,320 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2024-11-15 00:40:51,320 [INFO] sqlalchemy.engine.Engine: PRAGMA main.table_info("project")
+2024-11-15 00:40:51,320 [INFO] sqlalchemy.engine.Engine: [raw sql] ()
+2024-11-15 00:40:51,320 [INFO] sqlalchemy.engine.Engine: PRAGMA main.table_info("user")
+2024-11-15 00:40:51,320 [INFO] sqlalchemy.engine.Engine: [raw sql] ()
+2024-11-15 00:40:51,321 [INFO] sqlalchemy.engine.Engine: COMMIT
+2024-11-15 00:41:13,793 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2024-11-15 00:41:13,793 [INFO] sqlalchemy.engine.Engine: PRAGMA main.table_info("project")
+2024-11-15 00:41:13,793 [INFO] sqlalchemy.engine.Engine: [raw sql] ()
+2024-11-15 00:41:13,794 [INFO] sqlalchemy.engine.Engine: PRAGMA main.table_info("user")
+2024-11-15 00:41:13,794 [INFO] sqlalchemy.engine.Engine: [raw sql] ()
+2024-11-15 00:41:13,794 [INFO] sqlalchemy.engine.Engine: COMMIT
+2024-11-15 00:42:55,653 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2024-11-15 00:42:55,658 [INFO] sqlalchemy.engine.Engine: SELECT user.id, user.username, user.created_at 
+FROM user ORDER BY user.created_at DESC
+ LIMIT ? OFFSET ?
+2024-11-15 00:42:55,658 [INFO] sqlalchemy.engine.Engine: [generated in 0.00020s] (5, 0)
+2024-11-15 00:42:55,659 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2024-11-15 00:45:56,396 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2024-11-15 00:45:56,397 [INFO] sqlalchemy.engine.Engine: SELECT user.id, user.username, user.created_at 
+FROM user ORDER BY user.created_at DESC
+ LIMIT ? OFFSET ?
+2024-11-15 00:45:56,397 [INFO] sqlalchemy.engine.Engine: [cached since 180.7s ago] (5, 0)
+2024-11-15 00:45:56,399 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2024-11-15 00:47:15,827 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2024-11-15 00:47:15,828 [INFO] sqlalchemy.engine.Engine: SELECT user.id, user.username, user.created_at 
+FROM user 
+WHERE user.username = ?
+2024-11-15 00:47:15,828 [INFO] sqlalchemy.engine.Engine: [generated in 0.00026s] ('babelpainterwell',)
+2024-11-15 00:47:15,830 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2024-11-15 00:47:15,831 [ERROR] app.data_access.repositories.user_repository: User repository error in get_by_username: Class 'sqlalchemy.engine.row.Row' is not mapped
+2024-11-15 00:47:15,847 [INFO] app.external_services.github_api: Fetching projects for user 'babelpainterwell' from GitHub API.
+2024-11-15 00:47:16,359 [INFO] httpx: HTTP Request: GET https://api.github.com/users/babelpainterwell/repos "HTTP/1.1 200 OK"
+2024-11-15 00:47:16,366 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2024-11-15 00:47:16,369 [INFO] sqlalchemy.engine.Engine: INSERT INTO user (username, created_at) VALUES (?, ?)
+2024-11-15 00:47:16,369 [INFO] sqlalchemy.engine.Engine: [generated in 0.00026s] ('babelpainterwell', '2024-11-15 05:47:16.364909')
+2024-11-15 00:47:16,369 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2024-11-15 00:47:16,370 [ERROR] app.data_access.repositories.user_repository: User repository error in create: (sqlite3.IntegrityError) UNIQUE constraint failed: user.username
+[SQL: INSERT INTO user (username, created_at) VALUES (?, ?)]
+[parameters: ('babelpainterwell', '2024-11-15 05:47:16.364909')]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2024-11-15 00:47:16,370 [ERROR] app.services.user_service: Database error: Error creating user.
+2024-11-15 00:50:24,569 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2024-11-15 00:50:24,569 [INFO] sqlalchemy.engine.Engine: PRAGMA main.table_info("project")
+2024-11-15 00:50:24,569 [INFO] sqlalchemy.engine.Engine: [raw sql] ()
+2024-11-15 00:50:24,570 [INFO] sqlalchemy.engine.Engine: PRAGMA main.table_info("user")
+2024-11-15 00:50:24,570 [INFO] sqlalchemy.engine.Engine: [raw sql] ()
+2024-11-15 00:50:24,570 [INFO] sqlalchemy.engine.Engine: COMMIT
+2024-11-15 00:51:38,608 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2024-11-15 00:51:38,608 [INFO] sqlalchemy.engine.Engine: PRAGMA main.table_info("project")
+2024-11-15 00:51:38,608 [INFO] sqlalchemy.engine.Engine: [raw sql] ()
+2024-11-15 00:51:38,608 [INFO] sqlalchemy.engine.Engine: PRAGMA main.table_info("user")
+2024-11-15 00:51:38,608 [INFO] sqlalchemy.engine.Engine: [raw sql] ()
+2024-11-15 00:51:38,609 [INFO] sqlalchemy.engine.Engine: COMMIT
+2024-11-15 00:51:47,261 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2024-11-15 00:51:47,262 [INFO] sqlalchemy.engine.Engine: PRAGMA main.table_info("project")
+2024-11-15 00:51:47,262 [INFO] sqlalchemy.engine.Engine: [raw sql] ()
+2024-11-15 00:51:47,262 [INFO] sqlalchemy.engine.Engine: PRAGMA main.table_info("user")
+2024-11-15 00:51:47,262 [INFO] sqlalchemy.engine.Engine: [raw sql] ()
+2024-11-15 00:51:47,263 [INFO] sqlalchemy.engine.Engine: COMMIT
+2024-11-15 00:55:02,004 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2024-11-15 00:55:02,009 [INFO] sqlalchemy.engine.Engine: SELECT user.id, user.username, user.created_at 
+FROM user 
+WHERE user.username = ?
+2024-11-15 00:55:02,009 [INFO] sqlalchemy.engine.Engine: [generated in 0.00025s] ('babelpainterwell',)
+2024-11-15 00:55:02,012 [INFO] sqlalchemy.engine.Engine: SELECT user.id 
+FROM user 
+WHERE user.id = ?
+2024-11-15 00:55:02,012 [INFO] sqlalchemy.engine.Engine: [generated in 0.00057s] (1,)
+2024-11-15 00:55:02,014 [INFO] sqlalchemy.engine.Engine: SELECT project.id AS project_id, project.name AS project_name, project.description AS project_description, project.stars AS project_stars, project.forks AS project_forks, project.user_id AS project_user_id 
+FROM project 
+WHERE ? = project.user_id
+2024-11-15 00:55:02,014 [INFO] sqlalchemy.engine.Engine: [generated in 0.00027s] (1,)
+2024-11-15 00:55:02,015 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2024-11-15 00:55:02,016 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2024-11-15 00:55:02,017 [INFO] sqlalchemy.engine.Engine: SELECT project.id, project.name, project.description, project.stars, project.forks, project.user_id 
+FROM project 
+WHERE project.user_id = ?
+2024-11-15 00:55:02,017 [INFO] sqlalchemy.engine.Engine: [generated in 0.00016s] (1,)
+2024-11-15 00:55:02,018 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2024-11-15 00:55:17,460 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2024-11-15 00:55:17,461 [INFO] sqlalchemy.engine.Engine: SELECT user.id, user.username, user.created_at 
+FROM user 
+WHERE user.username = ?
+2024-11-15 00:55:17,461 [INFO] sqlalchemy.engine.Engine: [cached since 15.45s ago] ('babelpainterwell',)
+2024-11-15 00:55:17,463 [INFO] sqlalchemy.engine.Engine: SELECT user.id 
+FROM user 
+WHERE user.id = ?
+2024-11-15 00:55:17,463 [INFO] sqlalchemy.engine.Engine: [cached since 15.45s ago] (1,)
+2024-11-15 00:55:17,464 [INFO] sqlalchemy.engine.Engine: SELECT project.id AS project_id, project.name AS project_name, project.description AS project_description, project.stars AS project_stars, project.forks AS project_forks, project.user_id AS project_user_id 
+FROM project 
+WHERE ? = project.user_id
+2024-11-15 00:55:17,464 [INFO] sqlalchemy.engine.Engine: [cached since 15.45s ago] (1,)
+2024-11-15 00:55:17,465 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2024-11-15 00:55:17,466 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2024-11-15 00:55:17,466 [INFO] sqlalchemy.engine.Engine: SELECT project.id, project.name, project.description, project.stars, project.forks, project.user_id 
+FROM project 
+WHERE project.user_id = ?
+2024-11-15 00:55:17,466 [INFO] sqlalchemy.engine.Engine: [cached since 15.45s ago] (1,)
+2024-11-15 00:55:17,467 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2024-11-15 00:55:58,390 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2024-11-15 00:55:58,391 [INFO] sqlalchemy.engine.Engine: SELECT user.id, user.username, user.created_at 
+FROM user 
+WHERE user.username = ?
+2024-11-15 00:55:58,391 [INFO] sqlalchemy.engine.Engine: [cached since 56.38s ago] ('babelpainterwell',)
+2024-11-15 00:55:58,392 [INFO] sqlalchemy.engine.Engine: SELECT user.id 
+FROM user 
+WHERE user.id = ?
+2024-11-15 00:55:58,392 [INFO] sqlalchemy.engine.Engine: [cached since 56.38s ago] (1,)
+2024-11-15 00:55:58,393 [INFO] sqlalchemy.engine.Engine: SELECT project.id AS project_id, project.name AS project_name, project.description AS project_description, project.stars AS project_stars, project.forks AS project_forks, project.user_id AS project_user_id 
+FROM project 
+WHERE ? = project.user_id
+2024-11-15 00:55:58,393 [INFO] sqlalchemy.engine.Engine: [cached since 56.38s ago] (1,)
+2024-11-15 00:55:58,394 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2024-11-15 00:55:58,395 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2024-11-15 00:55:58,395 [INFO] sqlalchemy.engine.Engine: SELECT project.id, project.name, project.description, project.stars, project.forks, project.user_id 
+FROM project 
+WHERE project.user_id = ?
+2024-11-15 00:55:58,395 [INFO] sqlalchemy.engine.Engine: [cached since 56.38s ago] (1,)
+2024-11-15 00:55:58,396 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2024-11-15 00:56:07,746 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2024-11-15 00:56:07,747 [INFO] sqlalchemy.engine.Engine: SELECT user.id, user.username, user.created_at 
+FROM user ORDER BY user.created_at DESC
+ LIMIT ? OFFSET ?
+2024-11-15 00:56:07,747 [INFO] sqlalchemy.engine.Engine: [generated in 0.00010s] (5, 0)
+2024-11-15 00:56:07,747 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2024-11-15 00:56:58,318 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2024-11-15 00:56:58,318 [INFO] sqlalchemy.engine.Engine: PRAGMA main.table_info("project")
+2024-11-15 00:56:58,318 [INFO] sqlalchemy.engine.Engine: [raw sql] ()
+2024-11-15 00:56:58,319 [INFO] sqlalchemy.engine.Engine: PRAGMA main.table_info("user")
+2024-11-15 00:56:58,319 [INFO] sqlalchemy.engine.Engine: [raw sql] ()
+2024-11-15 00:56:58,319 [INFO] sqlalchemy.engine.Engine: COMMIT
+2024-11-15 00:57:14,320 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2024-11-15 00:57:14,321 [INFO] sqlalchemy.engine.Engine: PRAGMA main.table_info("project")
+2024-11-15 00:57:14,321 [INFO] sqlalchemy.engine.Engine: [raw sql] ()
+2024-11-15 00:57:14,321 [INFO] sqlalchemy.engine.Engine: PRAGMA main.table_info("user")
+2024-11-15 00:57:14,321 [INFO] sqlalchemy.engine.Engine: [raw sql] ()
+2024-11-15 00:57:14,321 [INFO] sqlalchemy.engine.Engine: COMMIT
+2024-11-15 00:58:25,841 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2024-11-15 00:58:25,841 [INFO] sqlalchemy.engine.Engine: PRAGMA main.table_info("project")
+2024-11-15 00:58:25,841 [INFO] sqlalchemy.engine.Engine: [raw sql] ()
+2024-11-15 00:58:25,841 [INFO] sqlalchemy.engine.Engine: PRAGMA main.table_info("user")
+2024-11-15 00:58:25,841 [INFO] sqlalchemy.engine.Engine: [raw sql] ()
+2024-11-15 00:58:25,842 [INFO] sqlalchemy.engine.Engine: COMMIT

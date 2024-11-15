@@ -25,6 +25,7 @@ class ProjectRepository:
                 result = await session.execute(statement)
                 return result.scalars().all()
         except SQLAlchemyError as e:
+            logger.error(f"Project repository error in get_most_starred: {e}")
             return []
         
 
@@ -39,6 +40,7 @@ class ProjectRepository:
                 result = await session.execute(statement)
                 return result.scalars().all()
         except SQLAlchemyError as e:
+            logger.error(f"Project repository error in get_by_user_id: {e}")
             return []
     
     @staticmethod
@@ -62,5 +64,5 @@ class ProjectRepository:
                 await session.commit()
                 return projects
         except SQLAlchemyError as e:
-            logger.error(f"Database error in create_projects: {e}")
+            logger.error(f"Project repository error in create_projects: {e}")
             return []

@@ -4,7 +4,7 @@ create a user repository that will be used to interact with the database
 
 from app.data_access.database import async_session
 from app.models import User
-from sqlalchemy.exc import SQLAlchemyError
+from sqlalchemy.exc import SQLAlchemyError, IntegrityError
 from sqlmodel import select
 from typing import Optional, List
 import logging
@@ -22,7 +22,7 @@ class UserRepository:
             async with async_session() as session:
                 statement = select(User).where(User.username == username)
                 result = await session.execute(statement)
-                user = result.one_or_none()  # it should't retrieve more than one user
+                user = result.scalars().one_or_none() # it should't retrieve more than one user
 
                 """
                 Even though I haven't implemented an auto-refresh mechanism for this project to synchronize the user's latest projects into the database, 
@@ -34,7 +34,7 @@ class UserRepository:
                     await session.refresh(user, attribute_names=["projects"])
                 return user
         except SQLAlchemyError as e:
-            logger.error(f"Database error in get_by_username: {e}")
+            logger.error(f"User repository error in get_by_username: {e}")
             return None
 
     @staticmethod
@@ -47,8 +47,12 @@ class UserRepository:
                 session.add(user)
                 await session.commit()
                 return user
+        except IntegrityError as e:
+            # ensure user uniqueness
+            logger.error(f"User repository integrity error in create: {e}")
+            return None
         except SQLAlchemyError as e:
-            logger.error(f"Database error in create: {e}")
+            logger.error(f"User repository error in create: {e}")
             return None
 
     @staticmethod
@@ -62,5 +66,5 @@ class UserRepository:
                 result = await session.execute(statement)
                 return result.scalars().all()
         except SQLAlchemyError as e:
-            logger.error(f"Database error in get_most_recent: {e}")
+            logger.error(f"User repository error in get_most_recent: {e}")
             return []

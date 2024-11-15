@@ -43,7 +43,7 @@ async def create_db_and_tables():
 async def not_found_exception_handler(request: Request, exc: NotFoundError):
     return JSONResponse(
         status_code=404,
-        content={"detail": str(exc)}
+        content={"detail": "Resource not found."}
     )
 
 @app.exception_handler(DatabaseError)

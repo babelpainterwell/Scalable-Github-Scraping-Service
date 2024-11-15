@@ -30,8 +30,8 @@ class GitHubAPIClient:
         self.headers = {
             "Accept": "application/vnd.github+json",
         } # we need json response
-        if settings.GITHUB_API_TOKEN: # if there is any token specified
-            self.headers["Authorization"] = f"token {settings.GITHUB_API_TOKEN}"
+        # if settings.GITHUB_API_TOKEN: # if there is any token specified
+        #     self.headers["Authorization"] = f"token {settings.GITHUB_API_TOKEN}"
         self.client = httpx.AsyncClient(headers=self.headers, base_url=self.base_url)
 
     async def fetch_user_projects(self, username: str):

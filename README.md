@@ -55,13 +55,15 @@ I delegate the core business logic to the service layer without embedding it in 
 
 ### Refenrece Links
 
-Poetry Documentation - https://python-poetry.org/docs/
-Typer Documentation - https://typer.tiangolo.com/
-FastAPI Documentation - https://fastapi.tiangolo.com/
+- Poetry Documentation - https://python-poetry.org/docs/
+- Typer Documentation - https://typer.tiangolo.com/
+- FastAPI Documentation - https://fastapi.tiangolo.com/
 
 ### Challenges
 
 1. To let SQLAlchemy ORM models to work with Pydantic models, later realized that FASTapi has built-in SQLModel which is a Pydantic model with SQLAlchemy support.
+2. Cannot call sync methods such as `create_engine` using an async engion.
+3. `User repository error in get_by_username: Class 'sqlalchemy.engine.row.Row' is not mapped`, however, a User object is expected.
 
 ### Q & A & Todo
 
@@ -69,4 +71,4 @@ FastAPI Documentation - https://fastapi.tiangolo.com/
 2. `create_async_engine` from SQLAlchemy works for SQLModel?
 3. To distinguish between a user not found and a user with no public repositories.
 4. To test the github_api module.
-5. Cannot call sync methods such as `create_engine` using an async engion.
+5. `most_starred` api - `NOT FOUND 404`

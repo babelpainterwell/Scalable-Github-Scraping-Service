@@ -1,12 +1,11 @@
 """
-I leverage the BaseSettings class from pydantic to create a settings class 
-that can be used to store configuration settings for the application.
+create a settings class that can be used to store configuration settings for the entire application
 """
 
 from pydantic_settings import BaseSettings
 
 class Settings(BaseSettings):
-    # could be overridden in the .env file
+    # an async sqlite driver is needed
     DATABASE_URL: str = "sqlite+aiosqlite:///./test.db"
 
     # to load environment variables from the .env file 
