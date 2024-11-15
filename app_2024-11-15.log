@@ -1,0 +1,36 @@
+2024-11-15 00:11:17,754 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2024-11-15 00:11:17,754 [INFO] sqlalchemy.engine.Engine: PRAGMA main.table_info("project")
+2024-11-15 00:11:17,754 [INFO] sqlalchemy.engine.Engine: [raw sql] ()
+2024-11-15 00:11:17,755 [INFO] sqlalchemy.engine.Engine: PRAGMA temp.table_info("project")
+2024-11-15 00:11:17,755 [INFO] sqlalchemy.engine.Engine: [raw sql] ()
+2024-11-15 00:11:17,756 [INFO] sqlalchemy.engine.Engine: PRAGMA main.table_info("user")
+2024-11-15 00:11:17,756 [INFO] sqlalchemy.engine.Engine: [raw sql] ()
+2024-11-15 00:11:17,756 [INFO] sqlalchemy.engine.Engine: PRAGMA temp.table_info("user")
+2024-11-15 00:11:17,756 [INFO] sqlalchemy.engine.Engine: [raw sql] ()
+2024-11-15 00:11:17,756 [INFO] sqlalchemy.engine.Engine: 
+CREATE TABLE user (
+	id INTEGER NOT NULL, 
+	username VARCHAR NOT NULL, 
+	created_at DATETIME NOT NULL, 
+	PRIMARY KEY (id)
+)
+
+
+2024-11-15 00:11:17,756 [INFO] sqlalchemy.engine.Engine: [no key 0.00006s] ()
+2024-11-15 00:11:17,758 [INFO] sqlalchemy.engine.Engine: CREATE UNIQUE INDEX ix_user_username ON user (username)
+2024-11-15 00:11:17,758 [INFO] sqlalchemy.engine.Engine: [no key 0.00010s] ()
+2024-11-15 00:11:17,759 [INFO] sqlalchemy.engine.Engine: 
+CREATE TABLE project (
+	id INTEGER NOT NULL, 
+	name VARCHAR NOT NULL, 
+	description VARCHAR, 
+	stars INTEGER NOT NULL, 
+	forks INTEGER NOT NULL, 
+	user_id INTEGER NOT NULL, 
+	PRIMARY KEY (id), 
+	FOREIGN KEY(user_id) REFERENCES user (id)
+)
+
+
+2024-11-15 00:11:17,759 [INFO] sqlalchemy.engine.Engine: [no key 0.00012s] ()
+2024-11-15 00:11:17,759 [INFO] sqlalchemy.engine.Engine: COMMIT

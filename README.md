@@ -69,3 +69,4 @@ FastAPI Documentation - https://fastapi.tiangolo.com/
 2. `create_async_engine` from SQLAlchemy works for SQLModel?
 3. To distinguish between a user not found and a user with no public repositories.
 4. To test the github_api module.
+5. Cannot call sync methods such as `create_engine` using an async engion.
