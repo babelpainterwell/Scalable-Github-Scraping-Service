@@ -59,6 +59,11 @@ I delegate the core business logic to the service layer without embedding it in 
 - Typer Documentation - https://typer.tiangolo.com/
 - FastAPI Documentation - https://fastapi.tiangolo.com/
 
+### Error Handling
+
+allow the errors from different layers to propagate up to the API layer, where they are caught and handled.
+Docs: different types of errors that can occur in the application, and how to handle them.
+
 ### Challenges
 
 1. To let SQLAlchemy ORM models to work with Pydantic models, later realized that FASTapi has built-in SQLModel which is a Pydantic model with SQLAlchemy support.
@@ -71,4 +76,4 @@ I delegate the core business logic to the service layer without embedding it in 
 2. `create_async_engine` from SQLAlchemy works for SQLModel?
 3. To distinguish between a user not found and a user with no public repositories.
 4. To test the github_api module.
-5. `most_starred` api - `NOT FOUND 404`
+5. no such api defined?

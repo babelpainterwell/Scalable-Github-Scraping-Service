@@ -8,6 +8,8 @@ from sqlalchemy.exc import SQLAlchemyError, IntegrityError
 from sqlmodel import select
 from typing import Optional, List
 import logging
+from app.core.exceptions import DatabaseError
+
 
 logger = logging.getLogger(__name__)
 
@@ -22,7 +24,8 @@ class UserRepository:
             async with async_session() as session:
                 statement = select(User).where(User.username == username)
                 result = await session.execute(statement)
-                user = result.scalars().one_or_none() # it should't retrieve more than one user
+                # it should't retrieve more than one user and could be None
+                user = result.scalars().one_or_none() 
 
                 """
                 Even though I haven't implemented an auto-refresh mechanism for this project to synchronize the user's latest projects into the database, 
@@ -35,7 +38,10 @@ class UserRepository:
                 return user
         except SQLAlchemyError as e:
             logger.error(f"User repository error in get_by_username: {e}")
-            return None
+            raise DatabaseError("SQLAlchemyError fetching user by username.")
+        except Exception as e:
+            logger.error(f"An unexpected user repository error occurred: {e}")
+            raise DatabaseError("Error fetching user by username.")
 
     @staticmethod
     async def create(user: User) -> Optional[User]:
@@ -50,15 +56,18 @@ class UserRepository:
         except IntegrityError as e:
             # ensure user uniqueness
             logger.error(f"User repository integrity error in create: {e}")
-            return None
+            raise DatabaseError("User already exists.")
         except SQLAlchemyError as e:
             logger.error(f"User repository error in create: {e}")
-            return None
+            raise DatabaseError("SQLAlchemyError creating user.")
+        except Exception as e:
+            logger.error(f"An unexpected user repository error occurred: {e}")
+            raise DatabaseError("Error creating user.")
 
     @staticmethod
     async def get_most_recent(n: int) -> List[User]:
         """
-        Retrieve the n most recent users, ordered by creation date.
+        Retrieve the n most recent users, ordered by creation date, which could be empty.
         """
         try:
             async with async_session() as session:
@@ -67,4 +76,6 @@ class UserRepository:
                 return result.scalars().all()
         except SQLAlchemyError as e:
             logger.error(f"User repository error in get_most_recent: {e}")
-            return []
+            raise DatabaseError("SQLAlchemyError fetching most recent users.")
+        except Exception as e:
+            raise DatabaseError("Error fetching most recent users.")

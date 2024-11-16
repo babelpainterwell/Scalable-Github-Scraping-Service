@@ -9,3 +9,8 @@ class DatabaseError(Exception):
 class ExternalAPIError(Exception):
     """Raised when there is an issue with external API"""
     pass
+
+
+class UserServiceError(Exception):
+    """Raised when there is an issue with the user service"""
+    pass

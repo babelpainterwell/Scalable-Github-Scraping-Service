@@ -6,6 +6,8 @@ Partial code such as initializing the client, setting the base URL, and setting 
 import httpx
 from app.core.config import settings
 import logging
+from app.core.exceptions import NotFoundError, ExternalAPIError
+
 
 # GET https://api.github.com/users/{username}/repos
 
@@ -50,13 +52,14 @@ class GitHubAPIClient:
             status_code = e.response.status_code
             if status_code == 404:
                 logger.warning(f"GitHub user '{username}' not found. Status code: {status_code}")
-                return []
+                # return [] # raise NotFoundError(f"User '{username}' not found on Github.")
+                raise NotFoundError(f"User '{username}' not found on Github.")
             else:
                 logger.error(f"HTTP error occurred: {e}. Status code: {status_code}")
-                raise
+                raise ExternalAPIError("Error fetching projects from GitHub.")
         except Exception as e:
             logger.exception(f"An unexpected error occurred: {e}")
-            raise
+            raise ExternalAPIError("Error fetching projects from GitHub.")
 
     async def close(self):
         await self.client.aclose()

@@ -8,6 +8,7 @@ from sqlalchemy.exc import SQLAlchemyError
 from typing import List, Optional
 from sqlmodel import select
 import logging
+from app.core.exceptions import DatabaseError
 
 
 
@@ -26,7 +27,10 @@ class ProjectRepository:
                 return result.scalars().all()
         except SQLAlchemyError as e:
             logger.error(f"Project repository error in get_most_starred: {e}")
-            return []
+            raise DatabaseError("SQLAlchemyError fetching most starred projects.")
+        except Exception as e:
+            logger.error(f"An unexpected project repository error occurred: {e}")
+            raise DatabaseError("Error fetching most starred projects.")
         
 
     @staticmethod 
@@ -38,10 +42,14 @@ class ProjectRepository:
             async with async_session() as session:
                 statement = select(Project).where(Project.user_id == user_id)
                 result = await session.execute(statement)
+                # could be empty
                 return result.scalars().all()
         except SQLAlchemyError as e:
             logger.error(f"Project repository error in get_by_user_id: {e}")
-            return []
+            raise DatabaseError("SQLAlchemyError fetching projects by user id.")
+        except Exception as e:
+            logger.error(f"An unexpected project repository error occurred: {e}")
+            raise DatabaseError("Error fetching projects by user id.")
     
     @staticmethod
     async def create_projects(user_id: int, projects_data: List[dict]) -> Optional[List[Project]]:
@@ -65,4 +73,7 @@ class ProjectRepository:
                 return projects
         except SQLAlchemyError as e:
             logger.error(f"Project repository error in create_projects: {e}")
-            return []
+            raise DatabaseError("SQLAlchemyError creating projects.")
+        except Exception as e:
+            logger.error(f"An unexpected project repository error occurred: {e}")
+            raise DatabaseError("Error creating projects.")
