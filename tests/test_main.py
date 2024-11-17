@@ -55,8 +55,56 @@ def test_read_item():
 - simulate a falure in the external API and raise ExternalAPIError and returns 503
 """
 
+
+# TEST CASES FOR /users/recent/{n}
+
 """
-7. Database error (including different scenarios)
+1. There are n users in the database.
+- status code should be 200
+- response should be the list of users
+"""
+
+"""
+2. There are fewer than n users in the database.
+- status code should be 200
+- response should be the list of users
+"""
+
+"""
+3. There are no users in the database.
+- status code should be 200
+- response should be an empty list
+"""
+
+
+
+# TEST CASES FOR /projects/most-starred/{n}
+
+"""
+1. There are n projects in the database.
+- status code should be 200
+- response should be the list of projects
+"""
+
+"""
+2. There are fewer than n projects in the database.
+- status code should be 200
+- response should be the list of projects
+"""
+
+"""
+3. There are no projects in the database.
+- status code should be 200
+- response should be an empty list
+"""
+
+
+
+# TEST CASES FOR database errors
+
+
+"""
+1. Database error (including different scenarios)
 a. user repository error in get_by_username
 b. user repository error in create
 c. user repository integrity error in create
@@ -70,6 +118,28 @@ i. unexpected project repository error occurred
 - response should be {"detail": "Internal server error."}
 """
 
+# TEST CASES FOR input validation
+# FastAPI has a built-in exception handler for RequestValidationError
+"""
+1. API input validation (including different scenarios)
+a. username is empty for /users/{username}/projects
+b. username is too long for /users/{username}/projects
+c. username contains invalid characters for /users/{username}/projects
+d. n is negative for /users/recent/{n}
+e. n is too large for /users/recent/{n}
+f. n is negative for /projects/most-starred/{n}
+g. n is too large for /projects/most-starred/{n}
+- status code should be 422
+"""
+
+
+# TEST CASES FOR unexpected errors
+
+"""
+1. Unexpected error occurred in the service.
+- status code should be 500
+- response should be {"detail": "An unexpected error occurred."}
+"""
 
 
 
