@@ -1,12 +1,13 @@
 # app/data_access/repositories/project_repository.py - 
 # create a project repository that will be used to interact with the database
 
+import logging
+from app.core.logging_config import *
 from app.data_access.database import async_session
 from app.models import Project
 from sqlalchemy.exc import SQLAlchemyError
 from typing import List, Optional
 from sqlmodel import select
-import logging
 from app.core.exceptions import DatabaseError
 
 

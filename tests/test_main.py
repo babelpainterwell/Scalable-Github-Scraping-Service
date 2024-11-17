@@ -7,63 +7,74 @@ fake_db = {
 
 }
 
-def test_get_user_projects():
-    response = client.get("/users/username/projects")
+def test_read_item():
+    response = client.get("/items/foo")
     assert response.status_code == 200
-    assert response.json() == []
+    assert response.json() == {"item_id": "foo", "name": "Fighters", "description": "Fighters are great!"}
 
-def test_get_most_recent_users():
-    response = client.get("/users/recent/5")
-    assert response.status_code == 200
-    assert response.json() == []
 
-def test_get_most_starred_projects():
-    response = client.get("/projects/most-starred/5")
-    assert response.status_code == 200
-    assert response.json() == []
 
-def test_get_user_projects_not_found():
-    response = client.get("/users/username/projects")
-    assert response.status_code == 404
-    assert response.json() == {"detail": "Resource not found."}
+# TEST CASES FOR /users/{username}/projects
 
-def test_get_most_recent_users_not_found():
-    response = client.get("/users/recent/5")
-    assert response.status_code == 404
-    assert response.json() == {"detail": "Resource not found."}
+"""
+1. User exists in the database with perojects.
+- status code should be 200
+- response should be the list of projects
+"""
 
-def test_get_most_starred_projects_not_found():
-    response = client.get("/projects/most-starred/5")
-    assert response.status_code == 404
-    assert response.json() == {"detail": "Resource not found."}
+"""
+2. User exists in the database with no projects.
+- status code should be 200
+- response should be an empty list
+"""
 
-def test_get_user_projects_internal_server_error():
-    response = client.get("/users/username/projects")
-    assert response.status_code == 500
-    assert response.json() == {"detail": "Internal server error."}
+"""
+3. User does not exist in the database but exists on Github with projects.
+- status code should be 200
+- response should be the list of projects
+- user should be added to the database
+- projects should be added to the database
+"""
 
-def test_get_most_recent_users_internal_server_error():
-    response = client.get("/users/recent/5")
-    assert response.status_code == 500
-    assert response.json() == {"detail": "Internal server error."}
+"""
+4. User does not exist in the database but exists on Github with no projects.
+- status code should be 200
+- response should be an empty list
+- user should be added to the database
+"""
 
-def test_get_most_starred_projects_internal_server_error():
-    response = client.get("/projects/most-starred/5")
-    assert response.status_code == 500
-    assert response.json() == {"detail": "Internal server error."}
 
-def test_get_user_projects_external_api_error():
-    response = client.get("/users/username/projects")
-    assert response.status_code == 503
-    assert response.json() == {"detail": "External API error."}
+"""
+5. User does not exist in the database and does not exist on Github.
+- status code should be 404
+- response should be {"detail": "Resource not found."}
+"""
 
-def test_get_most_recent_users_external_api_error():
-    response = client.get("/users/recent/5")
-    assert response.status_code == 503
-    assert response.json() == {"detail": "External API error."}
+"""
+6. GitHub API fails (eg. rate limit exceeded).
+- simulate a falure in the external API and raise ExternalAPIError and returns 503
+"""
 
-def test_get_most_starred_projects_external_api_error():
-    response = client.get("/projects/most-starred/5")
-    assert response.status_code == 503
-    assert response.json() == {"detail": "External API error."}
+"""
+7. Database error (including different scenarios)
+a. user repository error in get_by_username
+b. user repository error in create
+c. user repository integrity error in create
+d. user repository error in get_most_recent
+e. unexpected user repository error occurred
+f. project repository error in get_by_user_id
+g. project repository error in create
+h. project repository error in get_most_recent
+i. unexpected project repository error occurred
+- status code should be 500
+- response should be {"detail": "Internal server error."}
+"""
+
+
+
+
+
+
+
+
 

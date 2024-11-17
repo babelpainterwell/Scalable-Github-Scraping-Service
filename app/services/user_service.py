@@ -1,13 +1,13 @@
 """
 Through data access layer, the service layer interacts with the database. 
 """
-
+import logging 
+from app.core.logging_config import *
 from typing import List, Optional
 from app.data_access.repositories.project_repository import ProjectRepository
 from app.data_access.repositories.user_repository import UserRepository
 from app.external_services.github_api import GitHubAPIClient
 from app.models import Project, User
-import logging 
 from app.core.exceptions import NotFoundError, DatabaseError, ExternalAPIError
 
 # get a logger for current module

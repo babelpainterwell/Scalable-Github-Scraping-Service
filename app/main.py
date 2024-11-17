@@ -1,7 +1,10 @@
-from fastapi import FastAPI, HTTPException, Request
-from app.api.routes import router as api_router
+# app/main.py
+
+
 import logging
 from app.core.logging_config import *
+from fastapi import FastAPI, HTTPException, Request
+from app.api.routes import router as api_router
 from app.data_access.database import engine
 from sqlmodel import SQLModel
 from app.core.exceptions import NotFoundError, DatabaseError, ExternalAPIError

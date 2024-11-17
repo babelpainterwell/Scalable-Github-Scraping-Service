@@ -54,3 +54,45 @@ FROM project
 WHERE project.user_id = ?
 2024-11-17 13:05:18,723 [INFO] sqlalchemy.engine.Engine: [generated in 0.00008s] (3,)
 2024-11-17 13:05:18,724 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2024-11-17 13:20:28,844 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2024-11-17 13:20:28,844 [INFO] sqlalchemy.engine.Engine: PRAGMA main.table_info("project")
+2024-11-17 13:20:28,844 [INFO] sqlalchemy.engine.Engine: [raw sql] ()
+2024-11-17 13:20:28,845 [INFO] sqlalchemy.engine.Engine: PRAGMA main.table_info("user")
+2024-11-17 13:20:28,845 [INFO] sqlalchemy.engine.Engine: [raw sql] ()
+2024-11-17 13:20:28,845 [INFO] sqlalchemy.engine.Engine: COMMIT
+2024-11-17 13:23:02,614 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2024-11-17 13:23:02,614 [INFO] sqlalchemy.engine.Engine: PRAGMA main.table_info("project")
+2024-11-17 13:23:02,614 [INFO] sqlalchemy.engine.Engine: [raw sql] ()
+2024-11-17 13:23:02,614 [INFO] sqlalchemy.engine.Engine: PRAGMA main.table_info("user")
+2024-11-17 13:23:02,614 [INFO] sqlalchemy.engine.Engine: [raw sql] ()
+2024-11-17 13:23:02,615 [INFO] sqlalchemy.engine.Engine: COMMIT
+2024-11-17 13:23:28,796 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2024-11-17 13:23:28,797 [INFO] sqlalchemy.engine.Engine: PRAGMA main.table_info("project")
+2024-11-17 13:23:28,797 [INFO] sqlalchemy.engine.Engine: [raw sql] ()
+2024-11-17 13:23:28,797 [INFO] sqlalchemy.engine.Engine: PRAGMA main.table_info("user")
+2024-11-17 13:23:28,797 [INFO] sqlalchemy.engine.Engine: [raw sql] ()
+2024-11-17 13:23:28,797 [INFO] sqlalchemy.engine.Engine: COMMIT
+2024-11-17 13:23:59,031 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2024-11-17 13:23:59,032 [INFO] sqlalchemy.engine.Engine: PRAGMA main.table_info("project")
+2024-11-17 13:23:59,032 [INFO] sqlalchemy.engine.Engine: [raw sql] ()
+2024-11-17 13:23:59,032 [INFO] sqlalchemy.engine.Engine: PRAGMA main.table_info("user")
+2024-11-17 13:23:59,032 [INFO] sqlalchemy.engine.Engine: [raw sql] ()
+2024-11-17 13:23:59,032 [INFO] sqlalchemy.engine.Engine: COMMIT
+2024-11-17 13:24:13,177 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2024-11-17 13:24:13,177 [INFO] sqlalchemy.engine.Engine: PRAGMA main.table_info("project")
+2024-11-17 13:24:13,177 [INFO] sqlalchemy.engine.Engine: [raw sql] ()
+2024-11-17 13:24:13,177 [INFO] sqlalchemy.engine.Engine: PRAGMA main.table_info("user")
+2024-11-17 13:24:13,177 [INFO] sqlalchemy.engine.Engine: [raw sql] ()
+2024-11-17 13:24:13,178 [INFO] sqlalchemy.engine.Engine: COMMIT
+2024-11-17 13:24:19,817 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2024-11-17 13:24:19,818 [INFO] sqlalchemy.engine.Engine: PRAGMA main.table_info("project")
+2024-11-17 13:24:19,818 [INFO] sqlalchemy.engine.Engine: [raw sql] ()
+2024-11-17 13:24:19,818 [INFO] sqlalchemy.engine.Engine: PRAGMA main.table_info("user")
+2024-11-17 13:24:19,818 [INFO] sqlalchemy.engine.Engine: [raw sql] ()
+2024-11-17 13:24:19,819 [INFO] sqlalchemy.engine.Engine: COMMIT
+2024-11-17 13:24:41,276 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2024-11-17 13:24:41,276 [INFO] sqlalchemy.engine.Engine: PRAGMA main.table_info("project")
+2024-11-17 13:24:41,276 [INFO] sqlalchemy.engine.Engine: [raw sql] ()
+2024-11-17 13:24:41,276 [INFO] sqlalchemy.engine.Engine: PRAGMA main.table_info("user")
+2024-11-17 13:24:41,276 [INFO] sqlalchemy.engine.Engine: [raw sql] ()
+2024-11-17 13:24:41,277 [INFO] sqlalchemy.engine.Engine: COMMIT

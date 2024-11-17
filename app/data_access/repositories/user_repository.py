@@ -1,13 +1,13 @@
 """
 create a user repository that will be used to interact with the database
 """
-
+import logging 
+from app.core.logging_config import *
 from app.data_access.database import async_session
 from app.models import User
 from sqlalchemy.exc import SQLAlchemyError, IntegrityError
 from sqlmodel import select
 from typing import Optional, List
-import logging
 from app.core.exceptions import DatabaseError
 
 

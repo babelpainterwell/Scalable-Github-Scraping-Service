@@ -1,7 +1,7 @@
 # app/api/routes.py - define the API routes
 
 
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Path, Query
 from typing import List
 from app.models import User, Project
 from app.services.user_service import Service
@@ -10,7 +10,9 @@ from app.core.exceptions import NotFoundError, DatabaseError, ExternalAPIError
 router = APIRouter()
 
 @router.get("/users/{username}/projects", response_model=List[Project])
-async def get_user_projects(username:str):
+async def get_user_projects(
+    username: str = Path(..., regex=r"^[a-zA-Z0-9-]{1,39}$", description="GitHub username")
+):
     """
     fetches projects for a given user.
     1. if the user is not in the database, fetches the user's projects from the Github API
@@ -35,7 +37,9 @@ async def get_user_projects(username:str):
         raise HTTPException(status_code=500, detail=f"An unexpected error occurred. {str(e)}")
 
 @router.get("/users/recent/{n}", response_model=List[User])
-async def get_most_recent_users(n:int):
+async def get_most_recent_users(
+    n: int = Query(..., gt=0, le=100, description="Number of recent users to retrieve")
+):
     """
     retrieve the n most recent users
     1. if there are no users in the database, the api should return an empty list
@@ -51,7 +55,9 @@ async def get_most_recent_users(n:int):
 
 
 @router.get("/projects/most-starred/{n}", response_model=List[Project])
-async def get_most_starred_projects(n:int):
+async def get_most_starred_projects(
+    n: int = Query(..., gt=0, le=100, description="Number of most starred projects to retrieve")
+):
     """
     retrieve the n most starred projects
     1. if there are no projects in the database, the api should return an empty list
