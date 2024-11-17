@@ -69,6 +69,7 @@ Docs: different types of errors that can occur in the application, and how to ha
 1. To let SQLAlchemy ORM models to work with Pydantic models, later realized that FASTapi has built-in SQLModel which is a Pydantic model with SQLAlchemy support.
 2. Cannot call sync methods such as `create_engine` using an async engion.
 3. `User repository error in get_by_username: Class 'sqlalchemy.engine.row.Row' is not mapped`, however, a User object is expected.
+4. For non-existant user, the github rest api returns a 404 status code.
 
 ### Q & A & Todo
 
@@ -76,4 +77,4 @@ Docs: different types of errors that can occur in the application, and how to ha
 2. `create_async_engine` from SQLAlchemy works for SQLModel?
 3. To distinguish between a user not found and a user with no public repositories.
 4. To test the github_api module.
-5. no such api defined?
+5. no such api defined? having problems creating insert empty projects???

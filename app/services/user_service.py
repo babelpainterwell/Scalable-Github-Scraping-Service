@@ -15,73 +15,49 @@ logger = logging.getLogger(__name__)
 
 
 class Service:
-    @staticmethod 
-    async def get_user_projects_service(username: str) -> Optional[List[Project]]:
+
+    @staticmethod
+    async def get_user_projects_service(username: str) -> List[Project]:
         try:
-            try: 
-                user = await UserRepository.get_by_username(username)
-            except DatabaseError as e:
-                logger.error(f"Database error: {e}")
-                raise DatabaseError("Error fetching user.")
-            
+            user = await UserRepository.get_by_username(username)
             if user:
-                try: 
-                    projects = await ProjectRepository.get_by_user_id(user.id)
-                except DatabaseError as e:
-                    logger.error(f"Database error: {e}")
-                    raise DatabaseError("Error fetching projects.")
+                projects = await ProjectRepository.get_by_user_id(user.id)
                 return projects
             else:
                 github_client = GitHubAPIClient()
                 try:
-                    projects_data = await github_client.fetch_user_projects(username)
                     """
                     Needs to distinguish between user not found and user having no public repositories
                     1. if a user is not found, a NOT FOUND error should be raised
                     2. if a user is found but has no public repositories, no error should be raised
                     """
-                    # projects_data could be empty if the user has no public repositories
-
-                except NotFoundError as e:
-                    logger.warning(f"User '{username}' not found in both database and on Github.")
-                    raise NotFoundError(f"User '{username}' not found in database and on Github.")
-                except ExternalAPIError as e:
-                    logger.error(f"Error fetching projects from Github for user '{username}': {e}")
-                    raise ExternalAPIError("Error fetching projects from Github.")
-                except Exception as e:
-                    logger.error(f"An unexpected error occurred: {e}")
-                    raise
+                    projects_data = await github_client.fetch_user_projects(username)
+                except NotFoundError:
+                    logger.warning(f"User '{username}' not found on GitHub.")
+                    raise NotFoundError(f"User '{username}' not found on GitHub.")
                 finally:
                     await github_client.close()
-                
+
                 # Create user
                 user = User(username=username)
-                try: 
-                    user = await UserRepository.create(user)
-                except DatabaseError as e:
-                    logger.error(f"Database error: {e}")
-                    raise DatabaseError("Error creating user.")
+                user = await UserRepository.create(user)
 
                 # Create projects (could be empty)
-                try: 
+                projects = []
+                if projects_data:
                     projects = await ProjectRepository.create_projects(user.id, projects_data)
-                except DatabaseError as e:
-                    logger.error(f"Database error: {e}")
-                    raise DatabaseError("Error creating projects.")
-                return projects
 
-        except NotFoundError as e:
-            logger.warning(f"User '{username}' not found in database and on Github.")
-            raise NotFoundError(f"User '{username}' not found in database and on Github.")
+                return projects  # Can be empty list
         except DatabaseError as e:
             logger.error(f"Database error: {e}")
             raise DatabaseError("Error fetching user or projects.")
         except ExternalAPIError as e:
             logger.error(f"External API error: {e}")
-            raise ExternalAPIError("Error fetching projects from Github.")
+            raise ExternalAPIError("Error fetching projects from GitHub.")
         except Exception as e:
             logger.error(f"An unexpected error occurred: {e}")
-            raise Exception("An unexpected error occurred.")
+            raise Exception("An unexpected error occurred - get_user_projects_service")
+
 
     @staticmethod
     async def get_most_recent_users_service(n:int)->List[User]:
@@ -90,6 +66,9 @@ class Service:
         except DatabaseError as e:
             logger.error(f"Database error: {e}")
             raise DatabaseError("Error fetching most recent users.")
+        except Exception as e:
+            logger.error(f"An unexpected error occurred: {e}")
+            raise Exception("An unexpected error occurred - get_most_recent_users_service")
         return users
 
     @staticmethod
@@ -99,6 +78,9 @@ class Service:
         except DatabaseError as e:
             logger.error(f"Database error: {e}")
             raise DatabaseError("Error fetching most starred projects.")
+        except Exception as e:
+            logger.error(f"An unexpected error occurred: {e}")
+            raise Exception("An unexpected error occurred - get_most_starred_projects_service")
         return projects
 
 

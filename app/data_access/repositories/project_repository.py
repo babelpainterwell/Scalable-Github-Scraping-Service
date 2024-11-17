@@ -1,6 +1,5 @@
-"""
-create a project repository that will be used to interact with the database
-"""
+# app/data_access/repositories/project_repository.py - 
+# create a project repository that will be used to interact with the database
 
 from app.data_access.database import async_session
 from app.models import Project
@@ -57,6 +56,8 @@ class ProjectRepository:
         Create projects for a user.
         """
         try:
+            if not projects_data:
+                return []
             async with async_session() as session:
                 projects = []
                 for data in projects_data:
