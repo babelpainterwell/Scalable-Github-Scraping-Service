@@ -107,7 +107,23 @@ To interact with the RESTful API through the command-line tool, follow these ste
 
 ---
 
-### Architecture
+**Scalability** in this project is achieved primarily through the use of asynchronous operations and optimized database interactions and layered architecture.
+
+### Asynchronous Programming & Efficient Database Access
+
+- **Async Endpoints and Services**
+  By using async functions in FastAPI endpoints and service methods, the application can handle many concurrent requests without blocking.
+
+- **Async Database Operations**
+  The database interactions use asynchronous sessions (AsyncSession), allowing queries to run without holding up the event loop. This improves throughput and response times.
+
+- **Async External Calls**
+  The GitHub API client uses httpx.AsyncClient, enabling the application to make external HTTP requests without waiting synchronously, thus also improving throughput.
+
+- **Indexed Fields**
+  Indexing the username field in the User model speeds up lookup times.
+
+### Layered Architecture
 
 The project is designed with a layered architecture to keep things organized and maintainable. At the top, we have the **API layer** using FastAPI, which handles incoming HTTP requests and routes them to the correct endpoints. The **service layer** contains the business logic in the Service class; it orchestrates the interactions between the repositories and external services like the GitHub API. For database interactions, we have the **repository layer** with `UserRepository` and `ProjectRepository`, which abstract away the database details and provide clean methods for data access. We also have a **GitHub API client** (GitHubAPIClient) that takes care of fetching data from GitHub when needed. Our data models (User and Project) define the structure of the data we work with. Lastly, there's a **command-line interface** built with Typer that lets users interact with the API directly from the terminal.
 
@@ -141,7 +157,7 @@ I delegate the core business logic to the service layer without embedding it in 
 
 - Focuses solely on interacting with the database so that we make future changes in the database schema only affect this layer.
 
-~~When using SQLALchemy~~ Now using SQLModel for similicity and avoiding potential validation error, I implemented a repository pattern to abstract the database operations from the service layer, which is, similarly as we did with the external service layer, to make the code more testable and maintainable.
+~~When using SQLALchemy~~ Now using **SQLModel** for similicity and avoiding potential validation error, I implemented a repository pattern to abstract the database operations from the service layer, which is, similarly as we did with the external service layer, to make the code more testable and maintainable.
 
 ##### External Service Layer
 
@@ -164,25 +180,52 @@ I delegate the core business logic to the service layer without embedding it in 
 
 ---
 
+### Data Models
+
+The project defines two primary data models in `app/models.py`:
+
+- **User Model (User class):**
+
+  - Fields:
+    - id: An auto-incremented primary key (integer).
+    - username: The GitHub username, indexed and unique for fast lookups.
+    - created_at: Timestamp when the user was added to the database, defaults to the current UTC time.
+    - projects: A list of related Project instances (one-to-many relationship).
+
+- **Project Model (Project class):**
+
+  - Fields:
+    - id: An auto-incremented primary key (integer).
+    - name: The name of the project.
+    - description: An optional description of the project.
+    - stars: Number of stars the project has on GitHub.
+    - forks: Number of times the project has been forked.
+    - user_id: Foreign key linking to the User model.
+    - user: A reference back to the associated User instance.
+
+These models use **SQLModel**, which combines features of Pydantic and SQLAlchemy, providing both data validation and ORM capabilities.
+
+---
+
 ### Error Handling
 
-Error handling in the project is designed to be robust and user-friendly, providing meaningful feedback while maintaining the stability of the application.
+In this project, error handling for all API endpoints is centralized through the exception handlers defined in the `app/main.py` file. Each endpoint in `app/api/routes.py` performs its specific operations and, if any exceptions occur—such as NotFoundError, DatabaseError, or ExternalAPIError—these are not handled directly within the route functions. Instead, they propagate up to the global exception handlers in `app/main.py`.
 
 1. **Custom Exception Classes**
 
-- **NotFoundError**: Raised when a resource (user or project) is not found.
-- **DatabaseError**: Raised when an error occurs while interacting with the database.
-- **ExternalAPIError**: Raised when an error occurs while interacting with an external API (GitHub).
+   - **NotFoundError**: Raised when a resource (user) is not found.
+   - **DatabaseError**: Raised when an error occurs while interacting with the database.
+   - **ExternalAPIError**: Raised when an error occurs while interacting with an external API (GitHub).
 
 2. **Exception Handlers in FastAPI**
    In `app/main.py`, custom exception handlers are registered to catch these exceptions and return appropriate HTTP responses:
 
-- **NotFoundError Handler**: Returns a 404 status code with a message indicating that the resource was not found.
-- **DatabaseError Handler**: Returns a 500 status code with a message indicating a server error related to the database.
-- **ExternalAPIError Handler**: Returns a 503 status code with a message indicating an external API error.
-- **General Exception Handler**: Catches any other unhandled exceptions, logs the error, and returns a 500 status code with a generic error message.
+   - **NotFoundError Handler**: Returns a 404 status code with a message indicating that the resource was not found.
+   - **DatabaseError Handler**: Returns a 500 status code with a message indicating a server error related to the database.
+   - **ExternalAPIError Handler**: Returns a 503 status code with a message indicating an external API error.
+   - **General Exception Handler**: Catches any other unhandled exceptions, logs the error, and returns a 500 status code with a generic error message.
 
-3. **Implementation in Repositories and Services**
+3. **Error Handling Implementation in Repositories and Services**
 
 - **Repositories:**
 
@@ -194,7 +237,7 @@ Error handling in the project is designed to be robust and user-friendly, provid
   - The `Service` class methods use repositories and handle exceptions raised by them.
   - They catch specific exceptions like `NotFoundError`, `DatabaseError`, and `ExternalAPIError`, log the error, and re-raise the exception for the FastAPI exception handlers to process.
 
-4. **External API Client**
+4. **External API Client Error Handling**
 
 - The `GitHubAPIClient` handles communication with the GitHub API.
 - It catches HTTP errors from httpx and raises appropriate exceptions:
