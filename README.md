@@ -1,5 +1,7 @@
 # Scalable-Github-Scraping-Service
 
+**_A scalable system to scrape GitHub data, store it in a database, and provide a RESTful interface and CLI tool for querying repository information._**
+
 ###### Keywords
 
 FASTapi, Pydantic, Error handiling, Unit/Integration Test, Asynchrounous Architecture Design, logging, auto-scaling if possible
