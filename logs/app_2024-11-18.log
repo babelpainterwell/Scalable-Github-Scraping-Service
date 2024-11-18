@@ -4,3 +4,33 @@
 2024-11-18 01:03:13,627 [INFO] sqlalchemy.engine.Engine: PRAGMA main.table_info("user")
 2024-11-18 01:03:13,627 [INFO] sqlalchemy.engine.Engine: [raw sql] ()
 2024-11-18 01:03:13,627 [INFO] sqlalchemy.engine.Engine: COMMIT
+2024-11-18 02:28:35,328 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2024-11-18 02:28:35,335 [INFO] sqlalchemy.engine.Engine: SELECT project.id, project.name, project.description, project.stars, project.forks, project.user_id 
+FROM project ORDER BY project.stars DESC
+ LIMIT ? OFFSET ?
+2024-11-18 02:28:35,335 [INFO] sqlalchemy.engine.Engine: [generated in 0.00021s] (99, 0)
+2024-11-18 02:28:35,336 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2024-11-18 02:29:16,536 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2024-11-18 02:29:16,538 [INFO] sqlalchemy.engine.Engine: SELECT user.id, user.username, user.created_at 
+FROM user ORDER BY user.created_at DESC
+ LIMIT ? OFFSET ?
+2024-11-18 02:29:16,538 [INFO] sqlalchemy.engine.Engine: [generated in 0.00022s] (3, 0)
+2024-11-18 02:29:16,539 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2024-11-18 02:29:45,824 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2024-11-18 02:29:45,826 [INFO] sqlalchemy.engine.Engine: SELECT user.id, user.username, user.created_at 
+FROM user 
+WHERE user.username = ?
+2024-11-18 02:29:45,826 [INFO] sqlalchemy.engine.Engine: [generated in 0.00027s] ('nbamaster',)
+2024-11-18 02:29:45,827 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2024-11-18 02:29:45,839 [INFO] app.external_services.github_api: Fetching projects for user 'nbamaster' from GitHub API.
+2024-11-18 02:29:46,007 [INFO] httpx: HTTP Request: GET https://api.github.com/users/nbamaster/repos "HTTP/1.1 200 OK"
+2024-11-18 02:29:46,009 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2024-11-18 02:29:46,010 [INFO] sqlalchemy.engine.Engine: INSERT INTO user (username, created_at) VALUES (?, ?)
+2024-11-18 02:29:46,010 [INFO] sqlalchemy.engine.Engine: [generated in 0.00013s] ('nbamaster', '2024-11-18 07:29:46.008870')
+2024-11-18 02:29:46,013 [INFO] sqlalchemy.engine.Engine: COMMIT
+2024-11-18 02:29:51,869 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2024-11-18 02:29:51,870 [INFO] sqlalchemy.engine.Engine: SELECT user.id, user.username, user.created_at 
+FROM user ORDER BY user.created_at DESC
+ LIMIT ? OFFSET ?
+2024-11-18 02:29:51,871 [INFO] sqlalchemy.engine.Engine: [cached since 35.33s ago] (5, 0)
+2024-11-18 02:29:51,872 [INFO] sqlalchemy.engine.Engine: ROLLBACK
