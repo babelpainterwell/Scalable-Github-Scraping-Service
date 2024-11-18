@@ -165,18 +165,9 @@ I delegate the core business logic to the service layer without embedding it in 
 
 ##### Trade-offs and Design Decisions
 
-**1. Asynchronous Code**
-
-- Chose to use asynchronous code throughout to better align with FASTapi's async capabilities and improve performance for I/O bound operations such as database queries and HTTP requests.
-
-**2. Repository Pattern**
+**1. Repository Pattern**
 
 - Implemented repositories for data access to abstract the database operations from the service layer, which makes the code more testable and maintainable. The trade-off is that it adds an extra layer of complexity.
-
-**3. Data Validation**
-
-- Used Pydantic models for data validation. SQLModel is chosen for the ORM models to work with Pydantic models.
-  <br>
 
 ---
 
