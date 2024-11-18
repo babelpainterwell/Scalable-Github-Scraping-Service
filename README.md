@@ -4,6 +4,8 @@
 
 FASTapi, Pydantic, Error handiling, Unit/Integration Test, Asynchrounous Architecture Design, logging, auto-scaling if possible
 
+---
+
 ### To get started
 
 ##### Using the Command-Line Tool
@@ -103,6 +105,8 @@ To interact with the RESTful API through the command-line tool, follow these ste
    make start
    ```
 
+---
+
 ### Architecture
 
 The project is designed with a layered architecture to keep things organized and maintainable. At the top, we have the **API layer** using FastAPI, which handles incoming HTTP requests and routes them to the correct endpoints. The **service layer** contains the business logic in the Service class; it orchestrates the interactions between the repositories and external services like the GitHub API. For database interactions, we have the **repository layer** with `UserRepository` and `ProjectRepository`, which abstract away the database details and provide clean methods for data access. We also have a **GitHub API client** (GitHubAPIClient) that takes care of fetching data from GitHub when needed. Our data models (User and Project) define the structure of the data we work with. Lastly, there's a **command-line interface** built with Typer that lets users interact with the API directly from the terminal.
@@ -158,6 +162,8 @@ I delegate the core business logic to the service layer without embedding it in 
 - Used Pydantic models for data validation. SQLModel is chosen for the ORM models to work with Pydantic models.
   <br>
 
+---
+
 ### Error Handling
 
 Error handling in the project is designed to be robust and user-friendly, providing meaningful feedback while maintaining the stability of the application.
@@ -205,6 +211,8 @@ Error handling in the project is designed to be robust and user-friendly, provid
 
 - Logging is configured to capture error messages and stack traces and stored in a log file.
 
+---
+
 ### Testing Strategy and Test Coverage
 
 Mocking is employed in the tests to simulate the behavior of components that the unit under test interacts with, without relying on actual implementations. In this project, mocking is used extensively to:
@@ -250,6 +258,8 @@ Mocking is employed in the tests to simulate the behavior of components that the
   ```bash
   pytest
   ```
+
+---
 
 ### Refenrece Links
 
