@@ -1,7 +1,7 @@
 import logging
 from datetime import datetime
 
-log_filename = f"app_{datetime.now().strftime('%Y-%m-%d')}.log"
+log_filename = f"logs/app_{datetime.now().strftime('%Y-%m-%d')}.log"
 
 logging.basicConfig(
     level=logging.INFO,  

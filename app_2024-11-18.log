@@ -1,0 +1,44 @@
+2024-11-18 00:17:19,708 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2024-11-18 00:17:19,708 [INFO] sqlalchemy.engine.Engine: PRAGMA main.table_info("project")
+2024-11-18 00:17:19,709 [INFO] sqlalchemy.engine.Engine: [raw sql] ()
+2024-11-18 00:17:19,709 [INFO] sqlalchemy.engine.Engine: PRAGMA main.table_info("user")
+2024-11-18 00:17:19,709 [INFO] sqlalchemy.engine.Engine: [raw sql] ()
+2024-11-18 00:17:19,710 [INFO] sqlalchemy.engine.Engine: COMMIT
+2024-11-18 00:18:22,972 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2024-11-18 00:18:22,972 [INFO] sqlalchemy.engine.Engine: PRAGMA main.table_info("project")
+2024-11-18 00:18:22,973 [INFO] sqlalchemy.engine.Engine: [raw sql] ()
+2024-11-18 00:18:22,973 [INFO] sqlalchemy.engine.Engine: PRAGMA main.table_info("user")
+2024-11-18 00:18:22,973 [INFO] sqlalchemy.engine.Engine: [raw sql] ()
+2024-11-18 00:18:22,974 [INFO] sqlalchemy.engine.Engine: COMMIT
+2024-11-18 00:45:53,559 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2024-11-18 00:45:53,565 [INFO] sqlalchemy.engine.Engine: SELECT user.id, user.username, user.created_at 
+FROM user 
+WHERE user.username = ?
+2024-11-18 00:45:53,565 [INFO] sqlalchemy.engine.Engine: [generated in 0.00024s] ('babelpainterwell',)
+2024-11-18 00:45:53,567 [INFO] sqlalchemy.engine.Engine: SELECT user.id 
+FROM user 
+WHERE user.id = ?
+2024-11-18 00:45:53,567 [INFO] sqlalchemy.engine.Engine: [generated in 0.00013s] (1,)
+2024-11-18 00:45:53,569 [INFO] sqlalchemy.engine.Engine: SELECT project.id AS project_id, project.name AS project_name, project.description AS project_description, project.stars AS project_stars, project.forks AS project_forks, project.user_id AS project_user_id 
+FROM project 
+WHERE ? = project.user_id
+2024-11-18 00:45:53,569 [INFO] sqlalchemy.engine.Engine: [generated in 0.00014s] (1,)
+2024-11-18 00:45:53,569 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2024-11-18 00:45:53,570 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2024-11-18 00:45:53,571 [INFO] sqlalchemy.engine.Engine: SELECT project.id, project.name, project.description, project.stars, project.forks, project.user_id 
+FROM project 
+WHERE project.user_id = ?
+2024-11-18 00:45:53,571 [INFO] sqlalchemy.engine.Engine: [generated in 0.00014s] (1,)
+2024-11-18 00:45:53,572 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2024-11-18 00:47:22,979 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2024-11-18 00:47:22,982 [INFO] sqlalchemy.engine.Engine: SELECT user.id, user.username, user.created_at 
+FROM user ORDER BY user.created_at DESC
+ LIMIT ? OFFSET ?
+2024-11-18 00:47:22,982 [INFO] sqlalchemy.engine.Engine: [generated in 0.00029s] (5, 0)
+2024-11-18 00:47:22,983 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2024-11-18 00:47:53,615 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2024-11-18 00:47:53,618 [INFO] sqlalchemy.engine.Engine: SELECT project.id, project.name, project.description, project.stars, project.forks, project.user_id 
+FROM project ORDER BY project.stars DESC
+ LIMIT ? OFFSET ?
+2024-11-18 00:47:53,618 [INFO] sqlalchemy.engine.Engine: [generated in 0.00032s] (10, 0)
+2024-11-18 00:47:53,619 [INFO] sqlalchemy.engine.Engine: ROLLBACK

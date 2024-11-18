@@ -1,0 +1,6 @@
+2024-11-18 01:03:13,626 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2024-11-18 01:03:13,626 [INFO] sqlalchemy.engine.Engine: PRAGMA main.table_info("project")
+2024-11-18 01:03:13,626 [INFO] sqlalchemy.engine.Engine: [raw sql] ()
+2024-11-18 01:03:13,627 [INFO] sqlalchemy.engine.Engine: PRAGMA main.table_info("user")
+2024-11-18 01:03:13,627 [INFO] sqlalchemy.engine.Engine: [raw sql] ()
+2024-11-18 01:03:13,627 [INFO] sqlalchemy.engine.Engine: COMMIT
