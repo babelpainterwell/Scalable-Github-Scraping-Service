@@ -1,15 +1,15 @@
-"""
-create a settings class that can be used to store configuration settings for the entire application
-"""
+
+# app/core/config.py
+# ConfigDict is suggested by CHATGPT to load environment variables from the .env file.
 
 from pydantic_settings import BaseSettings
+from pydantic import ConfigDict
 
 class Settings(BaseSettings):
-    # an async sqlite driver is needed
+    # An async SQLite driver is needed
     DATABASE_URL: str = "sqlite+aiosqlite:///./test.db"
 
-    # to load environment variables from the .env file 
-    class Config:
-        env_file = ".env"
+    # Use ConfigDict to load environment variables from the .env file
+    model_config = ConfigDict(env_file=".env")
 
 settings = Settings()

@@ -64,12 +64,21 @@ I delegate the core business logic to the service layer without embedding it in 
 allow the errors from different layers to propagate up to the API layer, where they are caught and handled.
 Docs: different types of errors that can occur in the application, and how to handle them.
 
+### Testing
+
+- needs to mock different layers of the application to isolate the code being tested.
+- pytest - https://docs.pytest.org/en/stable/
+- `AsyncMock`: A class provided by the unittest.mock module designed to mock asynchronous functions
+  https://docs.python.org/3/library/unittest.mock.html#unittest.mock.AsyncMock
+
 ### Challenges
 
 1. To let SQLAlchemy ORM models to work with Pydantic models, later realized that FASTapi has built-in SQLModel which is a Pydantic model with SQLAlchemy support.
 2. Cannot call sync methods such as `create_engine` using an async engion.
 3. `User repository error in get_by_username: Class 'sqlalchemy.engine.row.Row' is not mapped`, however, a User object is expected.
 4. For non-existant user, the github rest api returns a 404 status code.
+5. To mock async functions in unit tests. `TestClient` is a synchronous interface.
+6. the mock approach bypass some exception handler.
 
 ### Q & A & Todo
 

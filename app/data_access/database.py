@@ -1,6 +1,4 @@
-"""
-sets up the database connection 
-"""
+# app/data_access/database.py
 
 # for making asynchrounous database connections
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession

@@ -1,3 +1,6 @@
+# app/core/exceptions.py
+
+
 class NotFoundError(Exception):
     """Raised when a resource (a user or projects) is not found"""
     pass 

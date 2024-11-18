@@ -1,6 +1,7 @@
-"""
-create a user repository that will be used to interact with the database
-"""
+# app/data_access/repositories/user_repository.py
+# Create a user repository that will be used to interact with the database.
+
+
 import logging 
 from app.core.logging_config import *
 from app.data_access.database import async_session
@@ -47,6 +48,7 @@ class UserRepository:
     async def create(user: User) -> Optional[User]:
         """
         Create a new user and commit to the database.
+        - For better race condition handling, if two same users are created at the same time, the desired behavior is to retrieve the existing user.
         """
         try: 
             async with async_session() as session:
@@ -54,9 +56,18 @@ class UserRepository:
                 await session.commit()
                 return user
         except IntegrityError as e:
-            # ensure user uniqueness
-            logger.error(f"User repository integrity error in create: {e}")
-            raise DatabaseError("User already exists.")
+            # User already exists, retrieve the user
+            logger.warning(f"User '{user.username}' already exists. Retrieving existing user.")
+            async with async_session() as session:
+                statement = select(User).where(User.username == user.username)
+                result = await session.execute(statement)
+                existing_user = result.scalars().one_or_none()
+                if existing_user:
+                    return existing_user
+                else:
+                    # if for some reason the user still doesn't exist, re-raise the error
+                    logger.error(f"IntegrityError occurred, but user '{user.username}' not found after re-fetching.")
+                    raise DatabaseError("User already exists.")
         except SQLAlchemyError as e:
             logger.error(f"User repository error in create: {e}")
             raise DatabaseError("SQLAlchemyError creating user.")

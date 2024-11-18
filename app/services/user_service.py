@@ -1,6 +1,7 @@
-"""
-Through data access layer, the service layer interacts with the database. 
-"""
+# app/services/user_service.py
+# Create a user service that will be used to interact with the repositories and external services.
+
+
 import logging 
 from app.core.logging_config import *
 from typing import List, Optional
@@ -25,18 +26,13 @@ class Service:
                 return projects
             else:
                 github_client = GitHubAPIClient()
-                try:
-                    """
+                """
                     Needs to distinguish between user not found and user having no public repositories
                     1. if a user is not found, a NOT FOUND error should be raised
                     2. if a user is found but has no public repositories, no error should be raised
-                    """
-                    projects_data = await github_client.fetch_user_projects(username)
-                except NotFoundError:
-                    logger.warning(f"User '{username}' not found on GitHub.")
-                    raise NotFoundError(f"User '{username}' not found on GitHub.")
-                finally:
-                    await github_client.close()
+                """
+                projects_data = await github_client.fetch_user_projects(username)
+                await github_client.close()
 
                 # Create user
                 user = User(username=username)
@@ -48,6 +44,9 @@ class Service:
                     projects = await ProjectRepository.create_projects(user.id, projects_data)
 
                 return projects  # Can be empty list
+        except NotFoundError:
+            logger.warning(f"User '{username}' not found on GitHub.")
+            raise NotFoundError(f"User '{username}' not found on GitHub.")
         except DatabaseError as e:
             logger.error(f"Database error: {e}")
             raise DatabaseError("Error fetching user or projects.")
@@ -56,32 +55,34 @@ class Service:
             raise ExternalAPIError("Error fetching projects from GitHub.")
         except Exception as e:
             logger.error(f"An unexpected error occurred: {e}")
-            raise Exception("An unexpected error occurred - get_user_projects_service")
+            raise 
 
 
     @staticmethod
     async def get_most_recent_users_service(n:int)->List[User]:
         try: 
             users = await UserRepository.get_most_recent(n)
+            return users
         except DatabaseError as e:
             logger.error(f"Database error: {e}")
             raise DatabaseError("Error fetching most recent users.")
         except Exception as e:
             logger.error(f"An unexpected error occurred: {e}")
-            raise Exception("An unexpected error occurred - get_most_recent_users_service")
-        return users
+            raise 
+        
 
     @staticmethod
     async def get_most_starred_projects_service(n:int)->List[Project]:
         try:  
             projects = await ProjectRepository.get_most_starred(n)
+            return projects
         except DatabaseError as e:
             logger.error(f"Database error: {e}")
             raise DatabaseError("Error fetching most starred projects.")
         except Exception as e:
             logger.error(f"An unexpected error occurred: {e}")
-            raise Exception("An unexpected error occurred - get_most_starred_projects_service")
-        return projects
+            raise 
+        
 
 
 
